@@ -1,0 +1,10 @@
+{
+    "en": ["protest", "riot", "strike", "tear gas", "demonstration", "march", "rally", "civil unrest", "unrest", "clash", "confrontation"],
+    "hi": ["andolan", "hartal", "vidroh", "dharna", "pradarshan", "satyagraha"],
+    "bn": ["birodh", "andolon", "dharna", "pradarshan"],
+    "ur": ["احتجاج", "ہڑتال", "مظاہرہ", "دھرنا"],
+    "es": ["protesta", "manifestación", "huelga", "disturbios"],
+    "fr": ["manifestation", "grève", "émeute", "protestation"],
+    "de": ["protest", "demonstration", "streik", "unruhen"],
+    "ar": ["احتجاج", "مظاهرة", "إضراب", "اضطرابات"]
+} 

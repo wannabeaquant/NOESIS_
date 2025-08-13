@@ -1,0 +1,40 @@
+{
+  "protest_unrest": [
+    "protest", "demonstration", "unrest", "riot", "civil unrest", "strike", "march", "rally", 
+    "sit-in", "blockade", "occupation", "walkout", "picket", "boycott", "uprising", "resistance", 
+    "dissent", "agitation", "mobilization", "standoff", "confrontation", "civil disobedience",
+    "mass gathering", "public assembly", "demonstration", "activist", "activism"
+  ],
+  "escalation_violence": [
+    "violence", "violent", "clash", "clashes", "standoff", "police", "arrest", "arrested", 
+    "detained", "custody", "crackdown", "tear gas", "pepper spray", "rubber bullets", "gunfire", 
+    "gunshot", "shooting", "looting", "vandalism", "burning", "fire", "arson", "killed", "death", 
+    "injured", "wounded", "casualties", "chaos", "emergency", "lockdown", "curfew", "martial law", 
+    "military", "troops", "deployment", "brutality", "beating", "assault"
+  ],
+  "early_warning": [
+    "gathering", "crowd", "tension", "tensions", "planned", "organizing", "mobilizing", 
+    "call to action", "warning", "risk", "build-up", "brewing", "expected", "possible", "threat", 
+    "monitoring", "situation", "update", "developing", "escalating", "volatile", "unease",
+    "discontent", "anger", "frustration", "grievances"
+  ],
+  "triggers": [
+    "election", "verdict", "policy", "law", "government", "police shooting", "incident", 
+    "corruption", "injustice", "discrimination", "rights", "human rights", "wages", "layoffs", 
+    "eviction", "land rights", "environment", "climate", "protest call", "protest plan", 
+    "protest schedule", "controversial", "decision", "announcement", "reform", "legislation"
+  ],
+  "high_severity": [
+    "killed", "death", "deaths", "fatality", "fatalities", "shooting", "gunfire", "bomb", 
+    "explosion", "military", "martial law", "state of emergency", "mass casualties", "riot police",
+    "swat", "national guard", "army", "troops", "curfew", "lockdown"
+  ],
+  "medium_severity": [
+    "injured", "wounded", "hospitalized", "arrest", "arrests", "detained", "tear gas", 
+    "pepper spray", "police", "clash", "violence", "vandalism", "property damage", "barricades"
+  ],
+  "location_indicators": [
+    "downtown", "city center", "capitol", "government building", "university", "campus", 
+    "street", "avenue", "square", "plaza", "park", "bridge", "highway", "intersection"
+  ]
+} 
