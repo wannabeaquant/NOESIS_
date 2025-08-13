@@ -14,7 +14,7 @@ This guide will walk you through deploying the NOESIS backend on Render step by 
 
 1. **Ensure your repository structure is correct**:
    ```
-   NOESIS/
+   /
    ├── backend/
    │   ├── main.py
    │   ├── requirements.txt
@@ -24,6 +24,8 @@ This guide will walk you through deploying the NOESIS backend on Render step by 
    │   ├── create_db.py
    │   ├── app/
    │   └── ...
+   ├── frontend/
+   └── ...
    ```
 
 2. **Commit and push all changes to GitHub**:
@@ -49,8 +51,8 @@ This guide will walk you through deploying the NOESIS backend on Render step by 
    - **Environment**: `Python 3`
    - **Region**: Choose closest to your users
    - **Branch**: `main` (or your default branch)
-   - **Root Directory**: `NOESIS/backend` (important!)
-   - **Build Command**: `pip install -r requirements.txt && python -m spacy download en_core_web_sm`
+   - **Root Directory**: `backend` (important!)
+   - **Build Command**: `pip install --upgrade pip && pip install -r requirements.txt && python -m spacy download en_core_web_sm`
    - **Start Command**: `python start_render.py`
 
 ### Step 3: Configure Environment Variables
@@ -59,7 +61,7 @@ In the Render dashboard, go to your service's "Environment" tab and add these va
 
 #### Required Variables:
 ```
-PYTHON_VERSION=3.10.0
+PYTHON_VERSION=3.11.0
 PORT=8000
 DATABASE_URL=sqlite:///./noesis.db
 HOST=0.0.0.0
@@ -148,7 +150,13 @@ SMTP_PASSWORD=your_app_password_here
 
 ### Common Issues
 
-1. **Build Fails**
+1. **Build Fails with pydantic-core or Rust compilation errors**
+   - This is a common issue with heavy ML dependencies on Render
+   - The updated `requirements.txt` uses more compatible versions
+   - If still failing, try using `requirements-minimal.txt` instead
+   - Alternative: Use `pip install --upgrade pip && pip install -r requirements-minimal.txt && python -m spacy download en_core_web_sm`
+
+2. **Build Fails**
    - Check the build logs for specific error messages
    - Ensure all dependencies are in `requirements.txt`
    - Verify Python version compatibility

@@ -3,11 +3,12 @@ services:
     name: noesis-backend
     env: python
     plan: starter
-    buildCommand: pip install -r requirements.txt && python -m spacy download en_core_web_sm
+    rootDir: backend
+    buildCommand: pip install --upgrade pip && pip install -r requirements.txt && python -m spacy download en_core_web_sm
     startCommand: python start_render.py
     envVars:
       - key: PYTHON_VERSION
-        value: 3.10.0
+        value: 3.11.0
       - key: PORT
         value: 8000
       - key: DATABASE_URL
