@@ -1,7 +1,6 @@
 from typing import Dict, List
 import spacy
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
-from transformers import pipeline, AutoTokenizer, AutoModelForSequenceClassification
 import geotext
 import requests
 import os
@@ -77,12 +76,7 @@ class NLPPipeline:
             print(f"spaCy model not available: {e}")
             self.spacy_nlp = None
 
-        # AI-based zero-shot classifier for protest relevance
-        try:
-            self.unrest_classifier = pipeline("zero-shot-classification", model="facebook/bart-large-mnli")
-        except Exception as e:
-            print(f"Zero-shot classifier not available: {e}")
-            self.unrest_classifier = None
+        # Note: transformers-based zero-shot classifier removed for Render compatibility
 
     def process(self, post: Dict) -> Dict:
         """Process a post through the full NLP pipeline"""
@@ -178,52 +172,16 @@ class NLPPipeline:
                 }
                 return 0.0
                 
-            if self.unrest_classifier:
-                result = self.unrest_classifier(
-                    clean_text,
-                    candidate_labels=["protest", "riot", "civil unrest", "political demonstration", "strike", "normal news", "sports", "entertainment", "weather", "business"],
-                    multi_label=True
-                )
-                # Return the score for the most relevant unrest label
-                protest_labels = ["protest", "riot", "civil unrest", "political demonstration", "strike"]
-                irrelevant_labels = ["sports", "entertainment", "weather", "business"]
-                
-                protest_scores = [score for label, score in zip(result['labels'], result['scores']) if label in protest_labels]
-                irrelevant_scores = [score for label, score in zip(result['labels'], result['scores']) if label in irrelevant_labels]
-                
-                max_protest_score = max(protest_scores) if protest_scores else 0.0
-                max_irrelevant_score = max(irrelevant_scores) if irrelevant_scores else 0.0
-                
-                # If irrelevant content is more confident, return 0
-                if max_irrelevant_score > max_protest_score and max_irrelevant_score > 0.6:
-                    self.last_classification_info = {
-                        "decision": "zero_shot_irrelevant",
-                        "details": {
-                            "max_protest_score": max_protest_score,
-                            "max_irrelevant_score": max_irrelevant_score
-                        }
-                    }
-                    return 0.0
-                    
-                self.last_classification_info = {
-                    "decision": "zero_shot_protest",
-                    "details": {
-                        "max_protest_score": max_protest_score,
-                        "max_irrelevant_score": max_irrelevant_score
-                    }
-                }
-                return max_protest_score
-            else:
-                # Enhanced fallback logic
-                score = self._enhanced_keyword_scoring(clean_text)
-                self.last_classification_info = {
-                    "decision": "keyword_scoring",
-                    "details": {"score": score}
-                }
-                return score
+            # Use enhanced keyword scoring (no transformers)
+            score = self._enhanced_keyword_scoring(clean_text)
+            self.last_classification_info = {
+                "decision": "keyword_scoring",
+                "details": {"score": score}
+            }
+            return score
                 
         except Exception as e:
-            print(f"AI protest classification error: {e}")
+            print(f"Protest classification error: {e}")
             self.last_classification_info = {"decision": "error", "details": {"error": str(e)}}
             return 0.0
     
