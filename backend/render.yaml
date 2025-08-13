@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: noesis-backend
+    env: python
+    plan: starter
+    buildCommand: pip install -r requirements.txt && python -m spacy download en_core_web_sm
+    startCommand: python start_render.py
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.10.0
+      - key: PORT
+        value: 8000
+      - key: DATABASE_URL
+        value: sqlite:///./noesis.db
+      - key: HOST
+        value: 0.0.0.0
+      - key: RELOAD
+        value: false
+      - key: DEBUG
+        value: false
+      - key: ENVIRONMENT
+        value: production
+      - key: LOG_LEVEL
+        value: INFO
+      - key: RATE_LIMIT_PER_MINUTE
+        value: 60
+      - key: RATE_LIMIT_PER_HOUR
+        value: 1000
